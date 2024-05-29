@@ -1,0 +1,42 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafit.model.dao.UserDao">
+
+	<insert id="createUser">
+		INSERT INTO User (user_tag, user_nickname, user_birth,
+		user_profileImage, user_regDate, user_streakColor, user_streakPrice)
+		VALUES (#{userTag}, #{userNickname}, #{userBirth}, #{userProfileImage},
+		CURRENT_TIMESTAMP, #{userStreakColor}, #{userStreakPrice})
+	</insert>
+
+	<select id="getUserById" parameterType="int"
+		resultType="com.ssafit.model.dto.User">
+		SELECT * FROM User WHERE user_id = #{userId}
+	</select>
+
+	<select id="getUserByTag" parameterType="String"
+		resultType="com.ssafit.model.dto.User">
+		SELECT * FROM User WHERE user_tag = #{userTag}
+	</select>
+
+	<update id="updateUser">
+		UPDATE User SET user_tag = #{userTag}, user_nickname = #{userNickname},
+		user_birth = #{userBirth}, user_profileImage = #{userProfileImage},
+		user_streakColor = #{userStreakColor}, user_streakPrice =
+		#{userStreakPrice} WHERE user_id = #{userId}
+	</update>
+
+	<delete id="deleteUser">
+		DELETE FROM User WHERE user_id = #{userId}
+	</delete>
+
+	<update id="updateStreakColor">
+		UPDATE User SET user_streakColor = #{userStreakColor} WHERE user_id =
+		#{userId}
+	</update>
+
+	<update id="updateStreakPrice">
+		UPDATE User SET user_streakPrice = #{userStreakPrice} WHERE user_id =
+		#{userId}
+	</update>
+
+</mapper>

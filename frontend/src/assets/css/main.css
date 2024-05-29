@@ -1,0 +1,347 @@
+/*=============== GOOGLE FONTS ===============*/
+@import url("https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&display=swap");
+
+/*=============== VARIABLES CSS ===============*/
+:root {
+  --header-height: 3.5rem;
+
+  /*========== Colors ==========*/
+  /*Color mode HSL(hue, saturation, lightness)*/
+  --bg-color: hsl(220, 18%, 78%);
+  --bg-color-light: hsl(220, 18%, 86%);
+  --title-color: hsl(220, 8%, 10%);
+  --text-color: hsl(220, 4%, 32%);
+  --text-color-light: hsl(220, 4%, 55%);
+  --body-color: hsl(220, 18%, 99%);
+  --container-color: hsl(220, 18%, 97%);
+
+  /*========== Font and typography ==========*/
+  /*.5rem = 8px | 1rem = 16px ...*/
+  --body-font: 'Lora', serif;
+
+  --biggest-font-size: 2.25rem;
+  --h1-font-size: 1.5rem;
+  --h2-font-size: 1.25rem;
+  --h3-font-size: 1rem;
+  --normal-font-size: .938rem;
+  --small-font-size: .813rem;
+  --smaller-font-size: .75rem;
+
+  /*========== Font weight ==========*/
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semi-bold: 600;
+
+  /*========== z index ==========*/
+  --z-tooltip: 10;
+  --z-fixed: 100;
+}
+
+@media screen and (min-width: 1124px) {
+    :root {
+      --biggest-font-size: 4.5rem;
+      --h1-font-size: 2.25rem;
+      --h2-font-size: 1.5rem;
+      --h3-font-size: 1.25rem;
+      --normal-font-size: 1rem;
+      --small-font-size: .875rem;
+      --smaller-font-size: .813rem;
+    }
+}
+
+/*=============== BASE ===============*/
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    /* font-family: var(--body-font); */
+    font-size: var(--normal-font-size);
+    background-color: var(--body-color);
+    color: var(--text-color);
+    transition: .4s; /*For animation dark mode*/
+}
+
+h1, h2, h3 {
+    color: var(--title-color);
+    font-weight: var(--font-medium);
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/*=============== REUSABLE CSS CLASSES ===============*/
+/* .container {
+    max-width: 1024px;
+    margin-right: 1.5rem;
+    margin-left: 1.5rem;
+} */
+  
+.grid {
+    display: grid;
+    gap: 1.5rem;
+}
+  
+.section {
+    margin-top: 5rem;
+    padding: 4.5rem 0 2rem;
+}
+  
+.section__title {
+    font-size: var(--h1-font-size);
+    text-align: center;
+    margin-bottom: 3rem;
+}
+  
+.main {
+    overflow: hidden; /* For animation ScrollReveal */
+}
+
+.navbar {
+    position:fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    z-index: var(--z-fixed);
+    transition: .4s;
+}
+
+.navbar-brand, .nav-link {
+    color: #333; /* 네비게이션 링크 색상 변경 */
+}
+
+.navbar-brand:hover, .nav-link:hover {
+    color: #000; /* 호버 상태에서 색상 강조 */
+}
+
+html {
+    scroll-behavior: smooth; /* 부드러운 스크롤 */
+}
+
+/* Video and Overlay Styling */
+.home {
+    position: relative;
+    width: 100vw; /* Video matches viewport width */
+    height: 100vh; /* Video matches viewport height */
+    overflow: hidden;
+    margin-top: 0;
+    padding-top: 0;
+}
+
+video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute; /* Ensure video stays in place */
+    top: 0;
+    left: 0;
+    z-index: -1; /* Video behind content */
+}
+
+/* Overlay Styling */
+.home::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Adjust transparency as needed */
+    z-index: 0; /* Ensure overlay is on top of video but below content */
+}
+
+.home__content {
+    position: absolute; /* Ensure content is above overlay */
+    z-index: 1; /* Ensure content is above overlay */
+    top: 50%;
+    left: 30%;
+    transform: translate(-50%, -50%); /* Center content */
+    color: white; /* Text color */
+    font-weight: 900;
+    font-size: 60px;
+}
+
+
+.new {
+    padding: 2rem 0;
+}
+
+.routine__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.routine__content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.routine__image {
+    flex: 1;
+    padding-right: 2rem;
+}
+
+.routine__image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.routine__info {
+    flex: 1;
+    padding-left: 2rem;
+}
+
+.routine__title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.routine__description {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
+
+@media (max-width: 768px) {
+    .routine__content {
+        flex-direction: column;
+    }
+
+    .routine__image,
+    .routine__info {
+        padding: 0;
+    }
+}
+
+.social__description {
+    text-align: center;
+}
+
+
+.social__title {
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.social__container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.social__card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+}
+
+.social__card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.social__img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.footer {
+    background-color: #f8f8f8;
+    padding: 2rem 0;
+}
+
+.footer__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.footer__left {
+    flex: 1;
+}
+
+.footer__title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.footer__left p {
+    margin: 0;
+}
+
+.footer__left a {
+    color: #6C63FF;
+    text-decoration: none;
+}
+
+.footer__left a:hover {
+    text-decoration: underline;
+}
+
+.footer__right {
+    display: flex;
+    gap: 2rem;
+    flex: 1;
+    justify-content: flex-end;
+}
+
+.footer__info {
+    flex: 1;
+}
+
+.footer__info-title {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.footer__info p {
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .footer__content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .footer__right {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+
+    .footer__info {
+        flex: none;
+    }
+}

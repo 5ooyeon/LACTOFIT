@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafit.model.dao.RoutineComponentsDao">
+
+    <insert id="insertRoutineComponent">
+        INSERT INTO RoutineComponents (exercise_id, routine_id, routineComponents_reps, routineComponents_weight)
+        VALUES (#{exerciseId}, #{routineId}, #{routineComponentsReps}, #{routineComponentsWeight})
+    </insert>
+
+    <select id="getRoutineComponentById" resultType="com.ssafit.model.dto.RoutineComponents">
+        SELECT * FROM RoutineComponents WHERE routineComponents_id = #{routineComponentsId}
+    </select>
+
+    <select id="getRoutineComponentsByRoutineId" resultType="map">
+        SELECT * FROM RoutineComponents r inner join exercise e on r.exercise_id = e.exercise_id WHERE routine_id = #{routine_id}
+    </select>
+
+    <select id="getAllRoutineComponents" resultType="com.ssafit.model.dto.RoutineComponents">
+        SELECT * FROM RoutineComponents
+    </select>
+
+    <update id="updateRoutineComponent">
+        UPDATE RoutineComponents
+        SET exercise_id = #{exerciseId}, routine_id = #{routineId}, routineComponents_reps = #{routineComponentsReps}, routineComponents_weight = #{routineComponentsWeight}
+        WHERE routineComponents_id = #{routineComponentsId}
+    </update>
+
+    <delete id="deleteRoutineComponent">
+        DELETE FROM RoutineComponents WHERE routineComponents_id = #{routineComponentsId}
+    </delete>
+
+</mapper>

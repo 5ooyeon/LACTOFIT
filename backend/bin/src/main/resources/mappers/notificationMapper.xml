@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafit.model.dao.NotificationDao">
+
+    <insert id="createNotification" parameterType="com.ssafit.model.dto.Notification">
+        INSERT INTO Notification (user_id, notification_content, notification_read, notification_regDate)
+        VALUES (#{userId}, #{notificationContent}, #{notificationRead}, NOW())
+    </insert>
+
+    <select id="getNotificationById" parameterType="int" resultType="com.ssafit.model.dto.Notification">
+        SELECT * FROM Notification WHERE notification_id = #{notificationId}
+    </select>
+
+    <select id="getNotificationsByUserId" parameterType="int" resultType="com.ssafit.model.dto.Notification">
+        SELECT * FROM Notification WHERE user_id = #{userId}
+    </select>
+
+    <delete id="deleteNotification" parameterType="int">
+        DELETE FROM Notification WHERE notification_id = #{notificationId}
+    </delete>
+</mapper>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafit.model.dao.RoutineDao">
+
+	<insert id="insertRoutine">
+		INSERT INTO Routine (user_id,
+		routine_name,
+		routine_desc, routine_regDate,
+		routine_updateDate)
+		VALUES
+		(#{userId},
+		#{routineName}, #{routineDesc}, #{routineRegDate},
+		#{routineUpdateDate})
+	</insert>
+
+	<select id="getRoutineById"
+		resultType="com.ssafit.model.dto.Routine">
+		SELECT * FROM Routine WHERE routine_id = #{routineId}
+	</select>
+
+	<select id="getAllRoutines"
+		resultType="com.ssafit.model.dto.Routine">
+		SELECT * FROM Routine
+	</select>
+
+	<update id="updateRoutine" >
+		UPDATE Routine
+		SET user_id = #{userId}, routine_name =
+		#{routineName}, routine_desc =
+		#{routineDesc}, routine_updateDate =
+		#{routineUpdateDate}
+		WHERE routine_id = #{routineId}
+	</update>
+
+	<delete id="deleteRoutine">
+		DELETE FROM Routine WHERE routine_id = #{routineId}
+	</delete>
+
+	<select id="getExercisesByRoutineId"
+		resultType="RoutineComponents">
+		SELECT rc.routineComponents_id AS routineComponentsId,
+		rc.exercise_id AS exerciseId,
+		rc.routine_id AS routineId,
+		rc.routineComponents_reps AS routineComponentsReps,
+		rc.routineComponents_weight AS routineComponentsWeight,
+		e.exercise_id AS 'exercise.exerciseId',
+		e.exercise_name AS 'exercise.exerciseName',
+		e.exercise_desc AS 'exercise.exerciseDesc',
+		e.exercise_part AS 'exercise.exercisePart'
+		FROM RoutineComponents rc
+		JOIN Exercise e ON rc.exercise_id = e.exercise_id
+		WHERE rc.routine_id = #{routineId}
+	</select>
+
+</mapper>

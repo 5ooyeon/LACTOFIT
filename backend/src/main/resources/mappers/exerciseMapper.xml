@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafit.model.dao.ExerciseDao">
+
+	<select id="getExerciseById"
+		resultType="com.ssafit.model.dto.Exercise">
+		SELECT * FROM Board WHERE
+		exercise_id = #{exerciseId}
+	</select>
+
+	<select id="getAllExercises"
+		resultType="com.ssafit.model.dto.Exercise">
+		SELECT * FROM Exercise ORDER BY exercise_part
+	</select>
+
+	<select id="getExercisesByPart"
+		resultType="com.ssafit.model.dto.Exercise">
+		SELECT * FROM Exercise WHERE exercise_part = #{exercisePart}
+	</select>
+
+	<select id="searchExercises"
+		resultType="com.ssafit.model.dto.Exercise">
+		SELECT * FROM Exercise
+		WHERE exercise_name LIKE CONCAT('%', #{keyword}, '%')
+		OR exercise_part LIKE CONCAT('%', #{keyword}, '%')
+	</select>
+	
+	<select id="getExerciseByExerciseName" resultType="com.ssafit.model.dto.Exercise">
+		select * from exercise where exercise_name like #{name}
+	</select>
+
+</mapper>

@@ -1,0 +1,48 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafit.model.dao.FollowDao">
+
+	<insert id="createFollow">
+		INSERT INTO Follow(user_id, following_user_id,
+		follow_regDate)
+		VALUES(#{userId}, #{followingUserId},
+		CURRENT_TIMESTAMP)
+	</insert>
+
+	<delete id="deleteFollow">
+		DELETE FROM Follow WHERE follow_id = #{followId} and
+		user_id = #{userId}
+	</delete>
+
+	<select id="getFollowByUsers"
+		resultType="com.ssafit.model.dto.Follow">
+		SELECT follow_id AS followId, user_id AS userId,
+		following_user_id AS
+		followingUserId, follow_regDate AS followRegDate
+		FROM Follow
+		WHERE user_id = #{userId} AND following_user_id =
+		#{followingUserId}
+	</select>
+
+	<select id="getFollowersByUserId"
+		resultType="map">
+		SELECT * 
+		FROM Follow f inner join user u on f.user_id = u.user_id
+		WHERE f.following_user_id = #{userId}
+	</select>
+
+	<select id="getFollowingByUserId"
+		resultType="map">
+		SELECT *
+		FROM Follow f inner join user u on f.following_user_id = u.user_id
+		WHERE f.user_id = #{followingUserId}
+	</select>
+
+	<select id="countFollowers" parameterType="int" resultType="int">
+		SELECT COUNT(*) FROM Follow WHERE following_user_id = #{userId}
+	</select>
+
+	<select id="countFollowing" parameterType="int" resultType="int">
+		SELECT COUNT(*) FROM Follow WHERE user_id = #{userId}
+	</select>
+</mapper>
+

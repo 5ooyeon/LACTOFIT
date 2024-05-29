@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafit.model.dao.BoardLikesDao">
+
+	<insert id="addLike"
+		parameterType="com.ssafit.model.dto.BoardLikes">
+		INSERT INTO BoardLikes (user_id, board_id, boardLikes_regDate)
+		VALUES (#{userId}, #{boardId}, NOW())
+	</insert>
+
+	<delete id="removeLike"
+		parameterType="com.ssafit.model.dto.BoardLikes">
+		DELETE FROM BoardLikes WHERE user_id = #{userId} AND board_id = #{boardId}
+	</delete>
+
+	<select id="getLikeByUsers"
+		parameterType="com.ssafit.model.dto.BoardLikes"
+		resultType="com.ssafit.model.dto.BoardLikes">
+		SELECT * FROM BoardLikes WHERE user_id = #{userId} AND board_id = #{boardId}
+		LIMIT 1
+	</select>
+
+	<select id="getLikesCountByBoardId" parameterType="int"
+		resultType="Map">
+		    SELECT *
+		    FROM boardlikes b
+		    INNER JOIN user u ON b.user_id = u.user_id
+		    WHERE b.board_id = #{boardId}
+	</select>
+</mapper>

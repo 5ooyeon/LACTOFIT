@@ -1,0 +1,22 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafit.model.dao.PointDao">
+	<insert id="trackPoint"
+		parameterType="com.ssafit.model.dto.Point">
+		INSERT INTO Point (user_id, point_amount, point_desc,
+		point_regDate)
+		VALUES (#{userId}, #{pointAmount}, 'sdf',
+		NOW())
+	</insert>
+
+	<select id="getPointsSumByUserId" parameterType="int"
+		resultType="int">
+		SELECT SUM(point_amount) FROM Point WHERE user_id =
+		#{user_id}
+	</select>
+
+	<select id="getPointDescByUserId" parameterType="int"
+		resultType="com.ssafit.model.dto.Point">
+		SELECT * FROM Point WHERE user_id = #{userId} ORDER BY point_regDate DESC
+	</select>
+
+</mapper>

@@ -1,0 +1,47 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafit.model.dao.BoardDao">
+
+	<insert id="createBoard">
+		INSERT INTO Board(user_id, routine_id, board_content,
+		board_imgUrl,
+		board_viewCnt, board_regDate, board_updateDate,
+		board_visibility)
+		VALUES(#{userId}, #{routineId}, #{boardContent},
+		#{boardImgUrl},
+		#{boardViewCnt}, NOW(), NOW(), #{boardVisibility})
+	</insert>
+
+	<select id="getBoardById" resultType="com.ssafit.model.dto.Board">
+		SELECT * FROM Board WHERE
+		board_id = #{boardId}
+	</select>
+
+	<select id="getBoardByUserId" resultType="com.ssafit.model.dto.Board">
+		SELECT * FROM Board WHERE User_Id = #{userId}
+	</select>
+
+	<select id="getFollowingBoardByUserId"
+		resultType="com.ssafit.model.dto.Board">
+		SELECT * FROM Board WHERE User_Id IN
+		(SELECT Following_User_Id From Follow WHERE User_Id = #{userId})
+	</select>
+
+	<select id="getAllBoards" resultType="com.ssafit.model.dto.Board">
+		SELECT * FROM Board
+	</select>
+
+	<update id="updateBoard">
+		UPDATE Board SET user_id = #{userId}, routine_id =
+		#{routineId},
+		board_content = #{boardContent}, board_imgUrl =
+		#{boardImgUrl},
+		board_viewCnt = #{boardViewCnt}, board_updateDate =
+		NOW(),
+		board_visibility = #{boardVisibility} WHERE board_id =
+		#{boardId}
+	</update>
+
+	<delete id="deleteBoard">
+		DELETE FROM Board WHERE board_id = #{boardId}
+	</delete>
+</mapper>
