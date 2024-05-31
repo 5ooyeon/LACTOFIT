@@ -1,4 +1,4 @@
-# First_Semester_FINALE
+# SSAFIT_FINALE
 
 ### 樂土畢 : 신나게(樂) 운동하고(FIT) 토요일에(土) 마치자(畢)! 
 
